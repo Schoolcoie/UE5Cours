@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "Avatar.generated.h"
 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInteractDelegate);
+
 UCLASS()
 class UE5COURS_API AAvatar : public ACharacter
 {
@@ -21,10 +24,16 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	float MaxHealth;
 
+	UPROPERTY(BlueprintAssignable)
+	FInteractDelegate OnInteract;
+
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
 private:
 	int GetPercent(float CurrentHealth, float MaxHealth);
+
+	UFUNCTION(BlueprintCallable)
+	void Interact();
 
 protected:
 	// Called when the game starts or when spawned

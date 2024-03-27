@@ -24,6 +24,11 @@ int AAvatar::GetPercent(float _CurrentHealth, float _MaxHealth)
 	return (_CurrentHealth / _MaxHealth) * 100;
 }
 
+void AAvatar::Interact()
+{
+	OnInteract.Broadcast();
+}
+
 // Called when the game starts or when spawned
 void AAvatar::BeginPlay()
 {
